@@ -1,0 +1,348 @@
+/* Game Layout */
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.game-info h1 {
+    color: #333;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.game-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.game-id {
+    font-family: monospace;
+    background: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.game-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.game-main {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Sidebar */
+.game-sidebar {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.player-info {
+    margin-bottom: 30px;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.black-player {
+    background: #2c3e50;
+    color: white;
+}
+
+.white-player {
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+.player-color {
+    font-size: 1.5rem;
+}
+
+.player-name {
+    font-weight: 600;
+}
+
+.captured-pieces {
+    margin-top: 10px;
+    min-height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.captured-piece {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.game-status {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.current-turn {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.game-state {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Move History */
+.move-history h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.move-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.move-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.move-number {
+    font-weight: 600;
+    color: #666;
+}
+
+.move-notation {
+    font-family: monospace;
+}
+
+/* Chess Board */
+.chess-board-container {
+    position: relative;
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 70px);
+    grid-template-rows: repeat(8, 70px);
+    border: 4px solid #8B4513;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: #F5DEB3;
+}
+
+.chess-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.chess-square.light {
+    background-color: #F5DEB3;
+}
+
+.chess-square.dark {
+    background-color: #D2691E;
+}
+
+.chess-square:hover {
+    background-color: #FFE4B5 !important;
+}
+
+.chess-square.selected {
+    background-color: #87CEEB !important;
+    box-shadow: inset 0 0 0 3px #4682B4;
+}
+
+.chess-square.valid-move {
+    background-color: #98FB98 !important;
+}
+
+.chess-square.valid-move::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #228B22;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.chess-square.valid-capture {
+    background-color: #FFB6C1 !important;
+}
+
+.chess-square.valid-capture::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #DC143C;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.chess-piece {
+    font-size: 2.5rem;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.chess-piece:hover {
+    transform: scale(1.1);
+}
+
+.board-coordinates {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.files {
+    position: absolute;
+    bottom: -25px;
+    left: 4px;
+    right: 4px;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    font-weight: 600;
+}
+
+.ranks {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: -25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+    font-weight: 600;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-main {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-sidebar {
+        width: 100%;
+        max-width: 600px;
+        order: 2;
+    }
+    
+    .chess-board-container {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .chess-board {
+        grid-template-columns: repeat(8, 50px);
+        grid-template-rows: repeat(8, 50px);
+    }
+    
+    .chess-piece {
+        font-size: 2rem;
+    }
+    
+    .game-sidebar {
+        padding: 20px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
+}
